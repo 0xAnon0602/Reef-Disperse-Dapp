@@ -1,0 +1,12 @@
+/* Reef UI Kit is used by default, you can add other styles here */
+
+.main {
+	min-height: 100vh;
+	width: clamp(300px, 75%, 800px) !important;
+	margin-inline: auto;
+	text-align: center;
+}
+
+.inputBox {
+	
+}
