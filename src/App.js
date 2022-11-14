@@ -233,23 +233,7 @@ function App() {
 
 	}
 
-	// const commission = async() => {
-	// 	var result = toSimplifyInput(value)
-	// 	console.log(result)
-	// 	var Values=(await result).allValue
-	// 	var toSend=0
 
-	// 	for(var z of Values){
-	// 		toSend+=parseFloat(z)
-	// 	}
-
-
-	// 	toSend = fromExponential(parseInt(parseInt(toSend))*10**18)
-	// 	setFinalAmount(toSend/10**18)
-
-
-
-	// }
 
 	return (
 		<Uik.Container className="main">
@@ -285,10 +269,7 @@ function App() {
 								 setValue(e.target.value)
 							}} 
 						  />
-						  {/* <Uik.Container>
- 						 <Uik.Text text="Total REEF required after 0.5% commission" type='mini'/>
-						 <Uik.ReefAmount value={finalAmount} />
-						 </Uik.Container> */}
+
 					<Uik.Button
 							text="Submit"
 							onClick={mainFunc}
@@ -309,10 +290,8 @@ function App() {
 					</>
 					):(
 						<>
-						<Uik.Alert
-							type='danger'
-							text='An error has occurred. Please refresh the page'
-						/>
+
+						<Uik.Tag color="red" text="An error has occurred. Please refresh the page"/>
 
 						</>
 					)}
