@@ -8,10 +8,14 @@ import Uik from "@reef-defi/ui-kit";
 import fromExponential from 'from-exponential';
 import { ApiPromise } from '@polkadot/api';
 import { options } from '@reef-defi/api';
+import Papa from "papaparse";
+import { SocialIcon } from 'react-social-icons';
+
 const { ethers } = require("ethers");
 
 const FactoryAbi = disperseReefContract.abi;
 const factoryContractAddress = disperseReefContract.address;
+const allowedExtensions = ["csv"];
 
 const URL = "wss://rpc-testnet.reefscan.com/ws";
 
@@ -25,6 +29,8 @@ function App() {
 	const [balanceStatus,setBalanceStatus]=useState(true)
 	const [inputError,setInputError]=useState("")
 	const [convert,setConvert]=useState("")
+    const [file, setFile] = useState("");
+ 
 
 	const toSimplifyInput = async (inputString) => {
 
@@ -65,7 +71,6 @@ function App() {
 
 
 		if(address!==''&&value!==''){
-			// console.log(address,value)
 			allAddress.push(address)
 			allValue.push(parseFloat(value))
 			address=''
@@ -87,7 +92,6 @@ function App() {
 
 		let injected;
 		if (allInjected[0] && allInjected[0].signer) {
-			console.log(allInjected)
 			injected = allInjected[0].signer;
 		}
 
@@ -210,7 +214,7 @@ function App() {
 
 		for(var z of Values){
 			toSend+=parseFloat(z)
-			finalValues.push(ethers.BigNumber.from(String(parseFloat(z)*10**18)))
+			finalValues.push(ethers.BigNumber.from(String(fromExponential(parseFloat(z)*10**18))))
 		}
 
 
@@ -224,7 +228,7 @@ function App() {
 
 	const getEvmAddress= async (walletAddy) => {
 
-		const provider = new WsProvider('wss://rpc-testnet.reefscan.com/ws');
+		const provider = new WsProvider(URL);
 		const api = new ApiPromise(options({ provider }));
 		await api.isReady;
 		
@@ -234,6 +238,52 @@ function App() {
 	}
 
 
+    const handleFileChange = (e) => {
+        setInputError("");
+         
+        // Check if user has entered the file
+        if (e.target.files.length) {
+            const inputFile = e.target.files[0];
+             
+            // Check the file extensions, if it not
+            // included in the allowed extensions
+            // we show the error
+            const fileExtension = inputFile?.type.split("/")[1];
+            if (!allowedExtensions.includes(fileExtension)) {
+                setInputError("Please input a csv file");
+                return;
+            }
+ 
+            // If input type is correct set the state
+            setFile(inputFile);
+        }
+    };
+
+	const handleParse = () => {
+         
+        if (!file) return setInputError("Enter a valid file");
+ 
+        const reader = new FileReader();
+         
+        reader.onload = async ({ target }) => {
+            const csv = Papa.parse(target.result, { header: true });
+            const parsedData = csv?.data;
+			var keys = Object.keys(parsedData[0])
+			var finalData=''
+			finalData += keys[1] + ','
+			finalData += keys[0]
+			for(var inputs of parsedData){
+				finalData += '\n'
+				finalData += inputs[keys[1]] + ','
+				finalData += inputs[keys[0]]
+			}
+			console.log(finalData)
+            const columns = finalData
+            setValue(columns);
+        };
+        reader.readAsText(file);
+    };
+ 
 
 	return (
 		<Uik.Container className="main">
@@ -256,6 +306,9 @@ function App() {
 					<Uik.Text text='Your Balance ' type='title'/>
 					<Uik.ReefAmount value={balance} />
 					</Uik.Container>
+
+					<br />
+
 					<Uik.Text text='Input the addresses and amounts like the given below example!' type='light'/>
 					<Uik.Text text='(If you are using REEF address then make sure that address has EVM address binded to it)' type='mini'/>
 
@@ -269,11 +322,30 @@ function App() {
 								 setValue(e.target.value)
 							}} 
 						  />
+				<Uik.Container>
+						<input
+						onChange={handleFileChange}
+						id="csvInput"
+						name="file"
+						type="File"
+						/>
+				<Uik.Button
+							text="Parse data from file"
+							onClick={handleParse}
+						/>	
+					</Uik.Container>
 
 					<Uik.Button
 							text="Submit"
 							onClick={mainFunc}
 						/>
+
+					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					<Uik.Container>
+					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					</Uik.Container>
+
 					{convert!=='' ? (
 					<>
 					<Uik.Tag color="green" text={convert}/>
@@ -287,6 +359,11 @@ function App() {
 					{balanceStatus ?(
 					<>
 					  <Uik.Loading text='Getting Your Balance ...'/>
+					  <Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					<Uik.Container>
+					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					</Uik.Container>
 					</>
 					):(
 						<>
@@ -305,6 +382,12 @@ function App() {
 							text="Connect Wallet"
 							onClick={checkExtension}
 						/>
+
+					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					<Uik.Container>
+					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					</Uik.Container>
 					</>
 				)}
 			</Uik.Container>
