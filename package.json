@@ -3,9 +3,6 @@
   "version": "0.1.0",
   "dependencies": {
     "@craco/craco": "^6.4.0",
-    "@fortawesome/fontawesome-svg-core": "^6.2.0",
-    "@fortawesome/free-brands-svg-icons": "^6.2.0",
-    "@fortawesome/react-fontawesome": "^0.2.0",
     "@open-wc/webpack-import-meta-loader": "^0.4.7",
     "@polkadot/extension-dapp": "^0.40.3",
     "@polkadot/rpc-provider": "^6.5.2",

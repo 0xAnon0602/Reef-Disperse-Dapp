@@ -342,7 +342,7 @@ function App() {
 
 					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
 					<Uik.Container>
-					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					</Uik.Container>
 
@@ -361,7 +361,7 @@ function App() {
 					  <Uik.Loading text='Getting Your Balance ...'/>
 					  <Uik.Text text='Created by 0xAnon' type='light' className="social"/>
 					<Uik.Container>
-					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					</Uik.Container>
 					</>
@@ -385,7 +385,7 @@ function App() {
 
 					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
 					<Uik.Container>
-					<SocialIcon url="https://twitter.com/jaketrent" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					</Uik.Container>
 					</>
