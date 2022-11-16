@@ -309,8 +309,8 @@ function App() {
 
 					<br />
 
-					<Uik.Text text='Input the addresses and amounts like the given below example!' type='light'/>
-					<Uik.Text text='(If you are using REEF address then make sure that address has EVM address binded to it)' type='mini'/>
+					<Uik.Text text='Input the addresses and amounts like the given below example!' type='mini'/>
+					<Uik.Text text='(If you are using REEF address then make sure that address has EVM address binded to it)' type='light'/>
 
 						  <Uik.Input textarea 
 						  	  className="inputBox"
@@ -340,7 +340,7 @@ function App() {
 							onClick={mainFunc}
 						/>
 
-					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					<Uik.Text text='Created by 0xAnon' type='mini' className="social"/>
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
@@ -359,7 +359,7 @@ function App() {
 					{balanceStatus ?(
 					<>
 					  <Uik.Loading text='Getting Your Balance ...'/>
-					  <Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					  <Uik.Text text='Created by 0xAnon' type='mini' className="social"/>
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
@@ -383,7 +383,7 @@ function App() {
 							onClick={checkExtension}
 						/>
 
-					<Uik.Text text='Created by 0xAnon' type='light' className="social"/>
+					<Uik.Text text='Created by 0xAnon' type='mini' className="social"/>
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
