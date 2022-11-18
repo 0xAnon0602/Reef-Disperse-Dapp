@@ -30,7 +30,7 @@ function App() {
 	const [inputError,setInputError]=useState("")
 	const [convert,setConvert]=useState("")
     const [file, setFile] = useState("");
- 
+	const [submitStatus,setSubmitStatus] = useState(false)
 
 	const toSimplifyInput = async (inputString) => {
 
@@ -154,7 +154,7 @@ function App() {
 	};
 
 	const mainFunc = async () => {
-
+		setSubmitStatus(true)
 		var results = await searchFunc()
 		var finalAddressesToSend = results.finalAddresses
 		var finalValuesToSend = results.finalValues
@@ -176,11 +176,13 @@ function App() {
 		console.log(txResult)
 		yourBalance(signer)
 		setInputError("")
+		Uik.notify.success('Your transaction went successfully!')
 		}catch(e){
 			console.log(e)
 			setInputError('Not valid addresses provided!')
 		}
 	}
+	setSubmitStatus(false)
 
 	}
 
@@ -335,11 +337,22 @@ function App() {
 						/>	
 					</Uik.Container>
 
-					<Uik.Button
+		
+
+					{submitStatus ? (
+						<>
+						<Uik.Loading/>
+						</>
+					):(
+					<>
+						<Uik.Button
 							text="Submit"
 							onClick={mainFunc}
 						/>
 
+					</>
+					)}
+					
 					<Uik.Text text='Created by 0xAnon' type='mini' className="social"/>
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
