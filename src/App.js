@@ -154,6 +154,7 @@ function App() {
 	};
 
 	const mainFunc = async () => {
+		setInputError('')
 		setSubmitStatus(true)
 		var results = await searchFunc()
 		var finalAddressesToSend = results.finalAddresses
@@ -178,8 +179,15 @@ function App() {
 		setInputError("")
 		Uik.notify.success('Your transaction went successfully!')
 		}catch(e){
-			console.log(e)
-			setInputError('Not valid addresses provided!')
+
+			if((String(e)).includes('Cancelled')){
+				Uik.notify.danger('Transaction was cancelled by user!')
+				setInputError('')
+			}
+			else{
+				Uik.notify.danger('Some error occured!')
+				setInputError('')
+			}
 		}
 	}
 	setSubmitStatus(false)
@@ -194,7 +202,23 @@ function App() {
 		var toSend=0
 		var finalValues=[]
 		var finalAddresses=[]
+		var isBalanceGreater=false
 
+		for(var z of Values){
+			toSend+=parseFloat(z)
+			finalValues.push(ethers.BigNumber.from(String(fromExponential(parseFloat(z)*10**18))))
+		}
+
+		toSend = fromExponential(parseInt(parseInt(toSend))*10**18)
+		
+
+		if(toSend/10**18>balance){
+			isBalanceGreater=true
+			setInputError('Not enough balance')
+		}
+
+		// eslint-disable-next-line
+		if(!isBalanceGreater){
 
 		for(var x of Addresses){
 			if(x[0]==='5'){
@@ -214,19 +238,14 @@ function App() {
 			}
 		}
 
-		for(var z of Values){
-			toSend+=parseFloat(z)
-			finalValues.push(ethers.BigNumber.from(String(fromExponential(parseFloat(z)*10**18))))
-		}
-
-
-		toSend = fromExponential(parseInt(parseInt(toSend))*10**18)
+	}
 
 		console.log(finalAddresses)
 		console.log(finalValues)
 		console.log(toSend/10**18)
 		return {finalAddresses,finalValues,toSend}
 	}
+
 
 	const getEvmAddress= async (walletAddy) => {
 
