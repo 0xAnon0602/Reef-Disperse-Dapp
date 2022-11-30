@@ -24,13 +24,14 @@ function App() {
 	const [balance, setBalance] = useState("");
 	const [signer, setSigner] = useState();
 	const [isWalletConnected, setWalletConnected] = useState(false);
-	const [ value, setValue ] = useState("")
+	const [value, setValue ] = useState("")
 	const [wallet,setWallet] = useState("")
 	const [balanceStatus,setBalanceStatus]=useState(true)
 	const [inputError,setInputError]=useState("")
 	const [convert,setConvert]=useState("")
     const [file, setFile] = useState("");
 	const [submitStatus,setSubmitStatus] = useState(false)
+
 
 	const toSimplifyInput = async (inputString) => {
 
@@ -304,6 +305,22 @@ function App() {
         };
         reader.readAsText(file);
     };
+
+
+	const disconnect = () => {
+		setBalance("")	
+		setSigner()
+		setWalletConnected(false)
+		setWallet("")
+		setValue("")
+		setBalanceStatus(true)
+		setInputError("")
+		setConvert("")
+		setFile("")
+		setSubmitStatus(false)
+		Uik.notify.success('Wallet disconnected successfully!')
+		
+	}
  
 
 	return (
@@ -318,7 +335,11 @@ function App() {
 	
 				{isWalletConnected  ? (
 					<Uik.Container vertical className="container">
+					<Uik.Container>
 					<Uik.Tag color="green" text={"Connected to " + wallet}/>
+					<Uik.Button text='Disconnect' size='small' className="Disconnect" onClick={disconnect} />
+					</Uik.Container>
+
 					{
 					// eslint-disable-next-line
 					balance!='' ? (
