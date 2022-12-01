@@ -161,7 +161,7 @@ function App() {
 		var finalAddressesToSend = results.finalAddresses
 		var finalValuesToSend = results.finalValues
 		var _toSend = results.toSend
-		if(finalAddressesToSend.length===finalValuesToSend.length && finalAddressesToSend.length!==0 && finalValuesToSend.length!==0){
+		if(finalAddressesToSend.length===finalValuesToSend.length && finalAddressesToSend.length!==0 && finalValuesToSend.length!==0 && inputError===''){
 
 
 		await checkSigner();
@@ -397,6 +397,8 @@ function App() {
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://www.youtube.com/watch?v=zsweKTdMCDY" style={{ height: 25, width: 25 }}/>
+
 					</Uik.Container>
 
 					{convert!=='' ? (
@@ -416,6 +418,8 @@ function App() {
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://www.youtube.com/watch?v=zsweKTdMCDY" style={{ height: 25, width: 25 }}/>
+
 					</Uik.Container>
 					</>
 					):(
@@ -440,6 +444,8 @@ function App() {
 					<Uik.Container>
 					<SocialIcon url="https://twitter.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
 					<SocialIcon url="https://github.com/0xAnon0602" style={{ height: 25, width: 25 }}/>
+					<SocialIcon url="https://www.youtube.com/watch?v=zsweKTdMCDY" style={{ height: 25, width: 25 }}/>
+
 					</Uik.Container>
 					</>
 				)}
