@@ -29,6 +29,9 @@ yarn
 yarn start
 ```
 
+### Documentation 
+https://various-nautilus-d6c.notion.site/Prediction-Platform-using-BYOG-of-API3-951ecadf8b23474babb80b31d4dcdd15
+
 ### Help
 
 If you need any help then you can ask it in on my [Twitter](https://twitter.com/0xAnon0602)
